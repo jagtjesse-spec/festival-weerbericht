@@ -41,6 +41,6 @@ jobs:
           git config user.name "Weerwacht"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add index.html
-          git commit -m "Weerupdate $(TZ=Europe/Amsterdam date +'%-d %B %Y, %H:%M')"
+          git commit -m "Weerupdate $(TZ=Europe/Amsterdam date +'%d-%m-%Y %H:%M')"
           git push
           echo "Pagina bijgewerkt en gepusht."
