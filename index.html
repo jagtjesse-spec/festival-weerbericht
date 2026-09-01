@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Hullabaloo Weerwacht</title>
+<meta name="description" content="Weerverwachting voor Hullabaloo 2026 in het Stadspark Groningen, 5 en 6 september.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>%E2%9B%85</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Karla:ital,wght@0,400;0,600;0,800;1,400&family=Space+Mono:wght@400;700&display=swap">
+<style>:root{color-scheme:light dark}img{max-width:100%}</style>
+</head>
+<body>
+<style>
+  :root{
+    --ground:#F3E7D8;
+    --ground-2:#EADAC6;
+    --card:#FFFBF4;
+    --ink:#1C140E;
+    --ink-soft:#6E5B48;
+    --edge:#1C140E;
+    --pink:#DE3F76;
+    --pink-soft:#F9D9E4;
+    --sticker-good:#AEE29C;
+    --sticker-warn:#FFD35C;
+    --sticker-bad:#FF9DB8;
+    --sticker-ink:#1C140E;
+    --good:#1E7345;
+    --warn:#9C6408;
+    --bad:#B93A55;
+    --pop:4px 4px 0 var(--edge);
+    --pop-sm:3px 3px 0 var(--edge);
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --ground:#141009;
+      --ground-2:#1D1710;
+      --card:#221B13;
+      --ink:#F7EBDB;
+      --ink-soft:#B09A82;
+      --edge:#4A3B2B;
+      --pink:#FF7BA6;
+      --pink-soft:#3A1F2A;
+      --good:#7DD5A2;
+      --warn:#EFC15C;
+      --bad:#FF8FA8;
+      --pop:4px 4px 0 var(--edge);
+      --pop-sm:3px 3px 0 var(--edge);
+    }
+  }
+  :root[data-theme="dark"]{
+    --ground:#141009;
+    --ground-2:#1D1710;
+    --card:#221B13;
+    --ink:#F7EBDB;
+    --ink-soft:#B09A82;
+    --edge:#4A3B2B;
+    --pink:#FF7BA6;
+    --pink-soft:#3A1F2A;
+    --good:#7DD5A2;
+    --warn:#EFC15C;
+    --bad:#FF8FA8;
+    --pop:4px 4px 0 var(--edge);
+    --pop-sm:3px 3px 0 var(--edge);
+  }
+
+  body{
+    background:var(--ground);
+    color:var(--ink);
+    font-family:"Karla",system-ui,-apple-system,"Segoe UI",sans-serif;
+    font-size:17px;line-height:1.55;margin:0;padding:34px 20px 64px;
+  }
+  .wrap{max-width:920px;margin:0 auto;display:flex;flex-direction:column;gap:30px;}
+
+  header{display:flex;flex-wrap:wrap;align-items:flex-end;gap:18px 24px;}
+  .head-text{display:flex;flex-direction:column;gap:8px;flex:1 1 340px;min-width:0;}
+  .eyebrow{
+    font-family:"Space Mono",ui-monospace,monospace;font-size:12px;font-weight:700;
+    letter-spacing:.16em;text-transform:uppercase;color:var(--pink);
+  }
+  h1{
+    font-family:"Anton","Karla",sans-serif;font-weight:400;text-transform:uppercase;
+    font-size:clamp(40px,9vw,78px);line-height:.9;letter-spacing:.005em;margin:0;
+    text-wrap:balance;
+  }
+  h1 em{font-style:normal;color:var(--pink);}
+  .sub{color:var(--ink-soft);font-size:16px;margin:0;max-width:46ch;}
+  .count{
+    flex:none;width:132px;height:132px;border-radius:50%;
+    background:var(--pink);color:#FFF8EE;border:2px solid var(--edge);box-shadow:var(--pop);
+    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0;
+    transform:rotate(-7deg);text-align:center;
+  }
+  .count b{font-family:"Anton",sans-serif;font-weight:400;font-size:46px;line-height:1;}
+  .count span{
+    font-family:"Space Mono",monospace;font-size:11px;font-weight:700;
+    letter-spacing:.14em;text-transform:uppercase;
+  }
+
+  .verdict{
+    background:var(--card);border:2px solid var(--edge);box-shadow:var(--pop);
+    border-radius:6px;padding:24px;display:flex;flex-direction:column;gap:16px;
+  }
+  .verdict h2{
+    font-family:"Anton",sans-serif;font-weight:400;text-transform:uppercase;
+    font-size:24px;letter-spacing:.01em;margin:0;
+  }
+  .verdict p{margin:0;color:var(--ink-soft);max-width:68ch;}
+  .checks{display:flex;flex-wrap:wrap;gap:12px 14px;padding:2px 0;}
+  .pill{
+    display:inline-flex;align-items:baseline;gap:8px;border-radius:999px;
+    padding:8px 17px;font-size:14px;font-weight:800;color:var(--sticker-ink);
+    border:2px solid #1C140E;box-shadow:3px 3px 0 rgba(28,20,14,.28);
+  }
+  .pill small{font-weight:600;font-size:13px;opacity:.75;}
+  .pill.good{background:var(--sticker-good);transform:rotate(-1.5deg);}
+  .pill.warn{background:var(--sticker-warn);transform:rotate(1deg);}
+  .pill.bad{background:var(--sticker-bad);transform:rotate(-.5deg);}
+
+  .days{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:22px;}
+  .day{
+    background:var(--card);border:2px solid var(--edge);box-shadow:var(--pop);
+    border-radius:6px;display:flex;flex-direction:column;overflow:hidden;
+  }
+  .day-top{padding:20px 22px 18px;display:flex;flex-direction:column;gap:3px;}
+  .day-name{
+    font-family:"Anton",sans-serif;font-weight:400;text-transform:uppercase;
+    font-size:26px;letter-spacing:.01em;
+  }
+  .day-meta{color:var(--ink-soft);font-size:14px;}
+  .acts{
+    font-family:"Space Mono",monospace;font-size:11px;font-weight:700;letter-spacing:.09em;
+    text-transform:uppercase;color:var(--pink);margin-top:4px;
+  }
+  .temp{
+    font-family:"Space Mono",monospace;font-variant-numeric:tabular-nums;
+    font-size:44px;font-weight:700;letter-spacing:-.03em;margin-top:12px;line-height:1;
+  }
+  .temp span{font-size:16px;color:var(--ink-soft);font-weight:400;letter-spacing:0;}
+
+  .perf{position:relative;height:0;border-top:2px dashed var(--edge);margin:0 14px;}
+  .perf::before,.perf::after{
+    content:"";position:absolute;top:-13px;width:22px;height:22px;border-radius:50%;
+    background:var(--ground);border:2px solid var(--edge);
+  }
+  .perf::before{left:-25px;}
+  .perf::after{right:-25px;}
+
+  .rows{display:flex;flex-direction:column;padding-top:2px;}
+  .row{
+    display:flex;justify-content:space-between;align-items:center;gap:14px;
+    padding:12px 22px;font-size:15px;border-bottom:1px solid var(--ground-2);
+  }
+  .row:last-child{border-bottom:none;}
+  .row .label{color:var(--ink-soft);}
+  .row .val{font-family:"Space Mono",monospace;font-variant-numeric:tabular-nums;font-weight:700;}
+  .measure{display:flex;align-items:center;gap:11px;}
+  .bar{
+    height:11px;width:86px;flex:none;border:2px solid var(--edge);border-radius:2px;
+    background:var(--ground-2);overflow:hidden;
+  }
+  .bar i{display:block;height:100%;background:var(--pink);}
+
+  .note{
+    background:var(--sticker-warn);color:#1C140E;border:2px solid #1C140E;
+    box-shadow:4px 4px 0 rgba(28,20,14,.3);border-radius:6px;
+    padding:16px 20px;font-size:15px;margin:0;transform:rotate(-.7deg);
+  }
+  .note strong{font-family:"Anton",sans-serif;font-weight:400;text-transform:uppercase;letter-spacing:.02em;}
+
+  footer{
+    color:var(--ink-soft);font-size:13px;border-top:2px solid var(--edge);
+    padding-top:16px;display:flex;flex-direction:column;gap:6px;
+  }
+  footer a{color:var(--pink);text-decoration-thickness:1px;text-underline-offset:2px;}
+  a:focus-visible,.pill:focus-visible{outline:3px solid var(--pink);outline-offset:3px;}
+
+  @media (prefers-reduced-motion: reduce){*{animation:none!important;transition:none!important;}}
+  @media (max-width:520px){
+    .count{width:108px;height:108px;}
+    .count b{font-size:38px;}
+  }
+</style>
+
+<div class="wrap">
+  <header>
+    <div class="head-text">
+      <div class="eyebrow">5 &amp; 6 september 2026 · Stadspark Groningen</div>
+      <h1>Hullabaloo <em>Weerwacht</em></h1>
+      <p class="sub">Northbound naar het Stadspark. Doel voor dit weekend: 25 °C, zon en droog.</p>
+    </div>
+    <div class="count"><b>4</b><span>dagen</span></div>
+  </header>
+
+  <section class="verdict">
+    <h2>Stand van zaken</h2>
+    <div class="checks">
+      <span class="pill bad">25 °C <small>nu 20–21 °C verwacht</small></span>
+      <span class="pill good">Zon <small>8 tot 9 uur per dag</small></span>
+      <span class="pill warn">Droog <small>buienkans 38–32 %</small></span>
+    </div>
+    <p>Het wordt een prima festivalweekend, alleen niet het zomerse weekend waar je op hoopte: 20 °C op zaterdag en 21 °C op zondag, met veel zon tussendoor. De buienkans van rond de een derde is het enige echte voorbehoud — dat is het type dag waarop er ergens tussen de middag en de avond één bui overtrekt en het daarna weer opdroogt. De vijf modellen zitten dicht bij elkaar (18 tot 22 °C), dus dit beeld is voor vier dagen vooruit al redelijk stevig.</p>
+  </section>
+
+  <div class="days">
+    <article class="day">
+      <div class="day-top">
+        <div class="day-name">Zaterdag 5 sept</div>
+        <div class="day-meta">Wisselend bewolkt, enkele buien · 12:00–00:00</div>
+        <div class="acts">Lewis Capaldi · S10 · Frenna</div>
+        <div class="temp">20° <span>/ 13° 's nachts</span></div>
+      </div>
+      <div class="perf"></div>
+      <div class="rows">
+        <div class="row"><span class="label">Buienkans</span>
+          <span class="measure"><span class="bar"><i style="width:38%"></i></span><span class="val">38 %</span></span></div>
+        <div class="row"><span class="label">Neerslag</span><span class="val">1 mm</span></div>
+        <div class="row"><span class="label">Zonuren</span>
+          <span class="measure"><span class="bar"><i style="width:64%"></i></span><span class="val">9 uur</span></span></div>
+        <div class="row"><span class="label">Wind</span><span class="val">W 4 bft</span></div>
+      </div>
+    </article>
+
+    <article class="day">
+      <div class="day-top">
+        <div class="day-name">Zondag 6 sept</div>
+        <div class="day-meta">Wisselend bewolkt, af en toe zon · 12:00–00:00</div>
+        <div class="acts">Martin Garrix · De Jeugd van Tegenwoordig · Son Mieux</div>
+        <div class="temp">21° <span>/ 12° 's nachts</span></div>
+      </div>
+      <div class="perf"></div>
+      <div class="rows">
+        <div class="row"><span class="label">Buienkans</span>
+          <span class="measure"><span class="bar"><i style="width:32%"></i></span><span class="val">32 %</span></span></div>
+        <div class="row"><span class="label">Neerslag</span><span class="val">0,8 mm</span></div>
+        <div class="row"><span class="label">Zonuren</span>
+          <span class="measure"><span class="bar"><i style="width:57%"></i></span><span class="val">8 uur</span></span></div>
+        <div class="row"><span class="label">Wind</span><span class="val">ZZW 3 bft</span></div>
+      </div>
+    </article>
+  </div>
+
+  <p class="note"><strong>Praktisch:</strong> Overdag is een T-shirt prima, maar met 12 tot 13 °C in de nacht wordt het na zonsondergang fris — neem een trui of hoodie mee voor de avondshows. Een dun regenjack erbij: bij een buienkans van een derde wil je niet met een doorweekte trui bij Garrix staan. Zaterdag staat er west 4, in het Stadspark voel je dat vooral op het open veld.</p>
+
+  <footer>
+    <div>Laatst bijgewerkt: dinsdag 1 september 2026. Bronnen: <a href="https://www.weeronline.nl/Europa/Nederland/Groningen/4056536/weersverwachting-14dagen">Weeronline</a>, <a href="https://www.weerplaza.nl/nederland/groningen/10226/">Weerplaza</a>, <a href="https://www.meteoblue.com/en/weather/10-days/groningen_the-netherlands_2755251">Meteoblue</a>, <a href="https://www.weersvoorspelling.nl/weer-nederland/groningen/14-daagse/10226">Weersvoorspelling.nl</a> en <a href="https://www.weer1.com/europe/netherlands/groningen?page=14">Weer1</a>. Deze pagina wordt elke ochtend opnieuw gemaakt tot en met zondag 6 september.</div>
+    <div>Eigen weerpagina van Jesse — geen officiële informatie van de festivalorganisatie.</div>
+  </footer>
+</div>
+
+</body></html>
