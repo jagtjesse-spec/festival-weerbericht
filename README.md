@@ -6,7 +6,7 @@ Eén statische HTML-pagina, geen build, geen dependencies. Alles zit in `index.h
 
 ## Live bekijken
 
-De pagina staat op GitHub Pages (Settings → Pages → Deploy from a branch → `main` / root).
+De pagina staat live op <https://jagtjesse-spec.github.io/festival-weerbericht/>.
 
 ## Lokaal bekijken
 
