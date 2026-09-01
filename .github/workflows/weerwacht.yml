@@ -1,0 +1,46 @@
+name: Weerwacht bijwerken
+
+on:
+  # 08:00, 14:00 en 20:00 Nederlandse tijd (CEST = UTC+2), 1 t/m 6 september.
+  schedule:
+    - cron: '0 6,12,18 1-6 9 *'
+  # Handmatig draaien kan via het Actions-tabblad.
+  workflow_dispatch:
+  # Draait ook als het script of deze workflow zelf verandert, zodat een
+  # wijziging meteen getest wordt.
+  push:
+    paths:
+      - '.github/workflows/weerwacht.yml'
+      - 'scripts/update-weer.pl'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: weerwacht
+  cancel-in-progress: false
+
+jobs:
+  bijwerken:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Perl controleren
+        run: perl -MJSON::PP -e 'print "JSON::PP aanwezig\n"'
+
+      - name: Verwachting ophalen en pagina bijwerken
+        run: perl scripts/update-weer.pl
+
+      - name: Wijziging vastleggen
+        run: |
+          if git diff --quiet -- index.html; then
+            echo "Geen wijziging in index.html, niets te committen."
+            exit 0
+          fi
+          git config user.name "Weerwacht"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          git commit -m "Weerupdate $(TZ=Europe/Amsterdam date +'%-d %B %Y, %H:%M')"
+          git push
+          echo "Pagina bijgewerkt en gepusht."
